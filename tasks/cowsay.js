@@ -16,7 +16,9 @@ module.exports = function(grunt) {
         var options = this.options({
             width: process.stdout.columns,
             message: 'Moo!',
-            type: 'say'
+            type: 'say',
+            output: '.tmp/cow.txt',
+            input: '.tmp/cow_sentence.txt'
         });
 
         var cowsayOptions = {
@@ -31,7 +33,10 @@ module.exports = function(grunt) {
             cowsayOptions[options.mood] = true;
         }
 
-        grunt.config.set('cowsay', cowsay[options.type](cowsayOptions));
+        if (options.input){
+            cowsayOptions.text = grunt.file.read(options.input);
+        }
 
+        grunt.file.write(options.output, cowsay[options.type](cowsayOptions));
     });
 };
