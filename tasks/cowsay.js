@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             cowsayOptions[options.mood] = true;
         }
 
-        console.log(cowsay[options.type](cowsayOptions));
+        grunt.config.set('cowsay', cowsay[options.type](cowsayOptions));
 
     });
 };
